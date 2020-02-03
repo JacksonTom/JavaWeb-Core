@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Function对象</title>
+
+    <script>
+        /*  Function对象创建
+        1.var fun = new Function(形参列表，方法体);
+        2.function fun(形参列表){
+            方法体
+         }
+        3.var fun = function(形参列表){
+            方法体
+         }
+        * */
+        //创建方式1
+        var fun1 = new Function("a","b","alert(a+b)");
+        fun1(1,2);
+        //创建方式2
+        function fun2(a,b) {
+            alert(a+b);
+        }
+        fun2(3,4);
+        //创建方式3
+        var fun3 = function(a,b){
+            alert(a+b);
+        }
+        fun3(5,6);
+
+
+        alert(fun3.length);
+        fun2 = function (a,b) {
+            alert(a-b);
+        }
+        fun2(3,4);
+
+
+
+        function add(){
+            var sum = 0;
+            for(var i = 0;i <= arguments.length;i++){
+                sum += i;
+            }
+            return sum;
+        }
+        var sum = add(1,2,3);
+        alert(sum);
+
+
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>
