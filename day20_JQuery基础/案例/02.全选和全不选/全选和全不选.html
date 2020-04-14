@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script  src="../../js/jquery-3.3.1.min.js"></script>
+		<script>
+			$(function () {
+				$(".itemSelect").click(function () {
+					//获取当前元素选中状态
+					let thisStatus = $(this).prop("checked");
+					console.log("checkStatus = " + checkStatus());
+					console.log("thisStatus = " + thisStatus);
+					//如果item状态一致则改变选中
+					if(checkStatus()){
+						if(thisStatus){
+							$("#all").prop("checked",true);
+						}
+					}else{
+						$("#all").prop("checked",false);
+					}
+				});
+			});
+			//点击checkbox按钮
+			function selectAll(obj) {
+				console.log("firstButton = " + obj.checked);
+				$(".itemSelect").prop("checked",obj.checked);
+			}
+			//检查所有item选中状态是否一致
+			function checkStatus() {
+				let item = $(".itemSelect");
+				let check = new Array(item.length);
+				$.each(item,function (index,data) {
+					check[index] = data.checked;
+				});
+				//console.log("item.length = " + item.length);
+				//console.log("check = " + check);
+				//判断status是否全部一致
+				for(let i=0;i<item.length;i++){
+					let flag = true;
+					if(check[i]!=check[0]){
+						return false;
+					}
+				}
+				return true;
+			}
+		</script>
+	</head>
+	<body>
+		<table id="tab1" border="1" width="800" align="center" >
+			<tr>
+				<td colspan="5"><input type="button" value="删除"></td>
+			</tr>
+			<tr>
+				<th><input type="checkbox" id='all' onclick="selectAll(this)" ></th>
+				<th>分类ID</th>
+				<th>分类名称</th>
+				<th>分类描述</th>
+				<th>操作</th>
+			</tr>
+			<tr>
+				<td><input type="checkbox" class="itemSelect"></td>
+				<td>1</td>
+				<td>手机数码</td>
+				<td>手机数码类商品</td>
+				<td><a href="">修改</a>|<a href="">删除</a></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" class="itemSelect"></td>
+				<td>2</td>
+				<td>电脑办公</td>
+				<td>电脑办公类商品</td>
+				<td><a href="">修改</a>|<a href="">删除</a></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" class="itemSelect"></td>
+				<td>3</td>
+				<td>鞋靴箱包</td>
+				<td>鞋靴箱包类商品</td>
+				<td><a href="">修改</a>|<a href="">删除</a></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" class="itemSelect"></td>
+				<td>4</td>
+				<td>家居饰品</td>
+				<td>家居饰品类商品</td>
+				<td><a href="">修改</a>|<a href="">删除</a></td>
+			</tr>
+		</table>
+	</body>
+</html>
