@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/jquery-3.5.0.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        $(function () {
+            //用on绑定事件
+            $("#btn").on("click",function () {
+                console.log("触发率单击事件。");
+            });
+            //用off接触绑定
+            $("#btn2").click(function () {
+                $("#btn").off("click");
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <input id="btn" type="button" value="使用on绑定点击事件">
+    <input id="btn2" type="button" value="使用off解绑点击事件">
+</body>
+</html>
