@@ -2,6 +2,7 @@
 *.class
 
 # Package Files #
+out/*
 */out/*
 
 # IDEA Files #
