@@ -6,7 +6,7 @@ import java.io.IOException;
 /*
 * Servlet快入门
 * */
-public class ServletDemo1 implements Servlet {
+public class ServletDemo1 extends GenericServlet {
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
 
