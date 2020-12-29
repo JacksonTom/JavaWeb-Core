@@ -9,4 +9,4 @@ out/*
 .idea/*
 *.iml
 */.idea/*
-day17_case/src/druid.properties
+*/druid.properties
