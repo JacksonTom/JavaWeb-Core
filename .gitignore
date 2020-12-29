@@ -1,4 +1,4 @@
-# Compiled class file
+# Compiled class file #
 *.class
 
 # Package Files #
@@ -10,6 +10,5 @@ out/*
 *.iml
 */.idea/*
 
-
 # Conf Files #
-**/druid.properties
+day17_case/src/druid.properties
