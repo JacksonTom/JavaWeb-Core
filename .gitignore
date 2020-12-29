@@ -10,5 +10,3 @@ out/*
 *.iml
 */.idea/*
 
-# Conf Files #
-day17_case/src/druid.properties
