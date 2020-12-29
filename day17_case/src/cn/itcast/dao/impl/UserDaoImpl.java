@@ -3,6 +3,7 @@ package cn.itcast.dao.impl;
 import cn.itcast.dao.UserDao;
 import cn.itcast.domain.User;
 import cn.itcast.util.JDBCUtils;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -22,5 +23,18 @@ public class UserDaoImpl implements UserDao {
         String sql = "select * from user";
         List<User> users = template.query(sql, new BeanPropertyRowMapper<>(User.class));
         return users;
+    }
+
+    @Override
+    public User findUserByUsernameAndPassword(String username, String password) {
+        String sql = "select * from user where username = ? and password = ?";
+        User user = null;
+        try {
+            user = template.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), username, password);
+            return user;
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

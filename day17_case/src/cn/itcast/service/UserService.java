@@ -12,7 +12,12 @@ public interface UserService {
 
     /*
     * 查询所有用户信息
-    * @return
+    * @return List<User>
     * */
     public List<User> findAll();
+    /*
+     * 根据用户名密码查询用户
+     * @return User
+     * */
+    public User login(User user);
 }
