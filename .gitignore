@@ -9,4 +9,7 @@ out/*
 .idea/*
 *.iml
 */.idea/*
-*/druid.properties
+
+
+# Conf Files #
+**/druid.properties
