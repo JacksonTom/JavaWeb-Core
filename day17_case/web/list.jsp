@@ -21,11 +21,22 @@
     <script src="js/jquery-2.1.0.min.js"></script>
     <!-- 3. 导入bootstrap的js文件 -->
     <script src="js/bootstrap.min.js"></script>
+
     <style type="text/css">
         td, th {
             text-align: center;
         }
     </style>
+
+    <script>
+        function deleteConfirm(id) {
+            //用户确认提示
+            if(confirm("确定删除？")){
+                location.href = "${pageContext.request.contextPath}/deleteUserServlet?id=" + id;
+            }
+        }
+    </script>
+
 </head>
 <body>
 <div class="container">
@@ -49,7 +60,8 @@
         </form>
     </div>
     <div style="float:right;margin: 5px">
-        <td colspan="8" align="center"><a class="btn btn-primary" href="${pageContext.request.contextPath}/add.jsp">添加联系人</a></td>
+        <td colspan="8" align="center"><a class="btn btn-primary" href="${pageContext.request.contextPath}/add.jsp">添加联系人</a>
+        </td>
         <td colspan="8" align="center"><a class="btn btn-primary" href="add.html">删除选中</a></td>
     </div>
 
@@ -75,7 +87,10 @@
                 <td>${user.address}</td>
                 <td>${user.qq}</td>
                 <td>${user.email}</td>
-                <td><a class="btn btn-default btn-sm" href="update.html">修改</a>&nbsp;<a class="btn btn-default btn-sm" href="">删除</a></td>
+                <td>
+                    <a class="btn btn-default btn-sm" href="update.html">修改</a>
+                    <a class="btn btn-default btn-sm" href="javascript:deleteConfirm(${user.id})">删除</a>
+                </td>
             </tr>
         </c:forEach>
     </table>

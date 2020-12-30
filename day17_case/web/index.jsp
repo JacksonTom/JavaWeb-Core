@@ -19,7 +19,7 @@
 <body>
 
 <div>
-    ${sessionScopeScope.username},欢迎您！
+    ${sessionScope.user.username},欢迎您！
 </div>
 <div align="center">
     <a

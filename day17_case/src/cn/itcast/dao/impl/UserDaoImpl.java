@@ -44,4 +44,11 @@ public class UserDaoImpl implements UserDao {
         int insert = template.update(sql, user.getName(), user.getGender(), user.getAge(), user.getAddress(), user.getQq(), user.getEmail());
         return insert;
     }
+
+    @Override
+    public int deleteUser(int id) {
+        String sql = "delete from user where id = ?";
+        int update = template.update(sql, id);
+        return update;
+    }
 }

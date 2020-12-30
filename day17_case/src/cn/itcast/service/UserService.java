@@ -25,5 +25,10 @@ public interface UserService {
      * @return int
      * */
     public int addUser(User user);
+    /*
+     * 根据id删除用户
+     * @return int
+     * */
+    public int DeleteUser(int id);
 
 }

@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
         //5.判断是否登录成功
         if (null != user_login){
             //用户存入session后跳转
-            request.setAttribute("user",user_login);
+            request.getSession().setAttribute("user",user_login);
             response.sendRedirect(request.getContextPath() + "/index.jsp");
         }else {
             //提示与跳转
