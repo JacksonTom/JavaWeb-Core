@@ -20,4 +20,10 @@ public interface UserService {
      * @return User
      * */
     public User login(User user);
+    /*
+     * 新增用户
+     * @return int
+     * */
+    public int addUser(User user);
+
 }

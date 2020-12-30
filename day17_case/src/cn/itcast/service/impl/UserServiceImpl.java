@@ -24,4 +24,10 @@ public class UserServiceImpl implements UserService {
     public User login(User user) {
         return dao.findUserByUsernameAndPassword(user.getUsername(),user.getPassword());
     }
+
+    @Override
+    public int addUser(User user) {
+        int insert = dao.addUser(user);
+        return insert;
+    }
 }
