@@ -11,11 +11,15 @@ import java.util.List;
  */
 public interface UserDao {
 
-    public List<User> findAll();
+    List<User> findAll();
 
-    public User findUserByUsernameAndPassword(String username, String password);
+    User findUserByUsernameAndPassword(String username, String password);
 
-    public int addUser(User user);
+    int addUser(User user);
 
-    public int deleteUser(int id);
+    int deleteUser(int id);
+
+    User findUserById(int id);
+
+    int updateUser(User user);
 }

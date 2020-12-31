@@ -30,7 +30,7 @@ public class UserDaoImpl implements UserDao {
         String sql = "select * from user where username = ? and password = ?";
         User user = null;
         try {
-            user = template.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), username, password);
+            user = template.queryForObject(sql, new BeanPropertyRowMapper<User>(User.class), username, password);
             return user;
         } catch (DataAccessException e) {
             e.printStackTrace();
@@ -49,6 +49,20 @@ public class UserDaoImpl implements UserDao {
     public int deleteUser(int id) {
         String sql = "delete from user where id = ?";
         int update = template.update(sql, id);
+        return update;
+    }
+
+    @Override
+    public User findUserById(int id) {
+        String sql = "select * from user where id = ?";
+        User user = template.queryForObject(sql, new BeanPropertyRowMapper<User>(User.class), id);
+        return user;
+    }
+
+    @Override
+    public int updateUser(User user) {
+        String sql = "update user set name = ?,gender = ?,age = ?,address = ?,qq = ?,email = ? where id = ?";
+        int update = template.update(sql, user.getName(), user.getGender(), user.getAge(), user.getAddress(), user.getQq(), user.getEmail(), user.getId());
         return update;
     }
 }
