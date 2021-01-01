@@ -65,4 +65,19 @@ public class UserDaoImpl implements UserDao {
         int update = template.update(sql, user.getName(), user.getGender(), user.getAge(), user.getAddress(), user.getQq(), user.getEmail(), user.getId());
         return update;
     }
+
+    @Override
+    public int deleteUserByids(String[] ids) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("delete from user where id in (");
+        for (int i = 0; i < ids.length; i++) {
+            builder.append(ids[i]);
+            if (i < ids.length - 1) {
+                builder.append(",");
+            }
+        }
+        builder.append(")");
+        int update = template.update(builder.toString());
+        return update;
+    }
 }

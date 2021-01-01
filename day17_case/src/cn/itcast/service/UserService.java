@@ -40,4 +40,9 @@ public interface UserService {
      * @return int
      * */
     int updateUser(User user);
+    /*
+     * 删除用户
+     * @return int
+     * */
+    int deleteUserByids(String[] ids);
 }

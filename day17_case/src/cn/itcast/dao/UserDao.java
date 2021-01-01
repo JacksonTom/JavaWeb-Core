@@ -22,4 +22,6 @@ public interface UserDao {
     User findUserById(int id);
 
     int updateUser(User user);
+
+    int deleteUserByids(String[] ids);
 }
