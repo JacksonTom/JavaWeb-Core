@@ -53,7 +53,7 @@
             let uids = document.getElementsByName("uid");
             let firstStatus = uids[0].checked;
             let sameFlag = false;
-            if (1 == uids.length){
+            if (1 == uids.length) {
                 sameFlag = true;
             }
             for (let i = 1; i < uids.length; i++) {
@@ -65,7 +65,7 @@
             }
             if (sameFlag) {
                 document.getElementById("first").checked = firstStatus;
-            }else {
+            } else {
                 document.getElementById("first").checked = false;
             }
         }
@@ -140,7 +140,7 @@
                 <th>邮箱</th>
                 <th>操作</th>
             </tr>
-            <c:forEach items="${users}" var="user" varStatus="s">
+            <c:forEach items="${requestScope.userByPage.list}" var="user" varStatus="s">
                 <tr>
                     <th><input type="checkbox" name="uid" value="${user.id}"></th>
                     <td>${s.count}</td>
@@ -161,23 +161,41 @@
     </form>
     <nav aria-label="Page navigation">
         <ul class="pagination">
-            <li>
-                <a href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li>
-                <a href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
+
+            <c:if test="${requestScope.userByPage.currentPage != 1}">
+                <li>
+                    <a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${requestScope.userByPage.currentPage - 1}&&rows=${requestScope.userByPage.rows}"
+                       aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            </c:if>
+
+            <c:forEach begin="1" end="${requestScope.userByPage.totalPage}" var="i">
+
+                <c:if test="${requestScope.userByPage.currentPage == i}">
+                    <li class="active"><a
+                            href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${i}&&rows=${requestScope.userByPage.rows}">${i}</a>
+                    </li>
+                </c:if>
+                <c:if test="${requestScope.userByPage.currentPage != i}">
+                    <li>
+                        <a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${i}&&rows=${requestScope.userByPage.rows}">${i}</a>
+                    </li>
+                </c:if>
+            </c:forEach>
+
+            <c:if test="${requestScope.userByPage.currentPage != requestScope.userByPage.totalPage}">
+                <li>
+                    <a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${requestScope.userByPage.currentPage + 1}&&rows=${requestScope.userByPage.rows}"
+                       aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </c:if>
+
             <span style="font-size: 25px;margin-left: 5px">
-                共16条记录，共4页
+                共${requestScope.userByPage.totalCount}条记录，共${requestScope.userByPage.totalPage}页
             </span>
         </ul>
     </nav>

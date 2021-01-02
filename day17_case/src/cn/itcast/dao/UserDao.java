@@ -24,4 +24,8 @@ public interface UserDao {
     int updateUser(User user);
 
     int deleteUserByids(String[] ids);
+
+    int findTotalCount();
+
+    List<User> findUserByPage(int start,int rows);
 }

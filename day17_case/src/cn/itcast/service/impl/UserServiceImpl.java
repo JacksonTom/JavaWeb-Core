@@ -2,8 +2,10 @@ package cn.itcast.service.impl;
 
 import cn.itcast.dao.UserDao;
 import cn.itcast.dao.impl.UserDaoImpl;
+import cn.itcast.domain.PageBean;
 import cn.itcast.domain.User;
 import cn.itcast.service.UserService;
+
 import java.util.List;
 
 /**
@@ -21,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(User user) {
-        return dao.findUserByUsernameAndPassword(user.getUsername(),user.getPassword());
+        return dao.findUserByUsernameAndPassword(user.getUsername(), user.getPassword());
     }
 
     @Override
@@ -48,6 +50,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public int deleteUserByids(String[] ids) {
         return dao.deleteUserByids(ids);
+    }
+
+    @Override
+    public PageBean<User> findUserByPage(int currentPage, int rows) {
+        PageBean<User> userPageBean = new PageBean<User>();
+        userPageBean.setCurrentPage(currentPage);
+        userPageBean.setRows(rows);
+        //总记录数
+        int totalCount = dao.findTotalCount();
+        userPageBean.setTotalCount(totalCount);
+        userPageBean.setTotalPage(totalCount % rows == 0 ? totalCount / rows : totalCount / rows + 1);
+        int start = (currentPage - 1) * rows;
+        List<User> userByPage = dao.findUserByPage(start, rows);
+        userPageBean.setList(userByPage);
+        return userPageBean;
     }
 
 

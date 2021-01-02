@@ -80,4 +80,19 @@ public class UserDaoImpl implements UserDao {
         int update = template.update(builder.toString());
         return update;
     }
+
+    @Override
+    public int findTotalCount() {
+        String sql = "select count(1) from user";
+        Integer totalCount = template.queryForObject(sql, Integer.class);
+        return totalCount;
+    }
+
+    @Override
+    public List<User> findUserByPage(int start, int rows) {
+        String sql = "select * from user limit ?,?";
+        List<User> userList = template.query(sql, new BeanPropertyRowMapper<User>(User.class),start,rows);
+        return userList;
+    }
+
 }
