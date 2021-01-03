@@ -7,7 +7,10 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author JacksonTom
@@ -82,16 +85,49 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public int findTotalCount() {
-        String sql = "select count(1) from user";
-        Integer totalCount = template.queryForObject(sql, Integer.class);
+    public int findTotalCount(Map<String, String[]> condition) {
+        String sql = "select count(1) from user where 1=1 ";
+        StringBuilder sb = new StringBuilder(sql);
+        List<Object> params = new ArrayList<Object>();
+        //遍历集合
+        Set<String> keySet = condition.keySet();
+        for (String key : keySet) {
+            if ("name".equals(key) || "address".equals(key) || "email".equals(key)) {
+                String value = condition.get(key)[0];
+                if (null != value && !"".equals(value)) {
+                    sb.append(" and " + key + " like ? ");
+                    params.add("%" + value + "%");//条件的值
+                }
+            }
+        }
+        System.out.println(sb);
+        System.out.println(params);
+        Integer totalCount = template.queryForObject(sb.toString(), Integer.class, params.toArray());
         return totalCount;
     }
 
     @Override
-    public List<User> findUserByPage(int start, int rows) {
-        String sql = "select * from user limit ?,?";
-        List<User> userList = template.query(sql, new BeanPropertyRowMapper<User>(User.class),start,rows);
+    public List<User> findUserByPage(int start, int rows, Map<String, String[]> condition) {
+        String sql = "select * from user where 1 = 1";
+        StringBuilder sb = new StringBuilder(sql);
+        List<Object> params = new ArrayList<Object>();
+        //遍历集合
+        Set<String> keySet = condition.keySet();
+        for (String key : keySet) {
+            if ("name".equals(key) || "address".equals(key) || "email".equals(key)) {
+                String value = condition.get(key)[0];
+                if (null != value && !"".equals(value)) {
+                    sb.append(" and " + key + " like ? ");
+                    params.add("%" + value + "%");//条件的值
+                }
+            }
+        }
+        sb.append(" order by id limit ?,?");
+        params.add(start);
+        params.add(rows);
+        System.out.println(sb);
+        System.out.println(params);
+        List<User> userList = template.query(sb.toString(), new BeanPropertyRowMapper<User>(User.class), params.toArray());
         return userList;
     }
 

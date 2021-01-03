@@ -3,6 +3,7 @@ package cn.itcast.service;
 import cn.itcast.domain.PageBean;
 import cn.itcast.domain.User;
 import java.util.List;
+import java.util.Map;
 
 /**
  @author     JacksonTom
@@ -47,8 +48,8 @@ public interface UserService {
      * */
     int deleteUserByids(String[] ids);
     /*
-     * 分页查询用户
+     * 分页条件查询用户
      * @return PageBean<User>
      * */
-    PageBean<User> findUserByPage(int currentPage, int rows);
+    PageBean<User> findUserByPage(int currentPage, int rows, Map<String, String[]> condition);
 }

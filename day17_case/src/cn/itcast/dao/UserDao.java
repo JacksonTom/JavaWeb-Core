@@ -3,6 +3,7 @@ package cn.itcast.dao;
 import cn.itcast.domain.User;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author JacksonTom
@@ -25,7 +26,7 @@ public interface UserDao {
 
     int deleteUserByids(String[] ids);
 
-    int findTotalCount();
+    int findTotalCount(Map<String, String[]> condition);
 
-    List<User> findUserByPage(int start,int rows);
+    List<User> findUserByPage(int start, int rows, Map<String, String[]> condition);
 }

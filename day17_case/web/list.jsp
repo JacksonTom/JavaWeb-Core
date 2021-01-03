@@ -104,18 +104,21 @@
     <h3 style="text-align: center">用户信息列表</h3>
 
     <div style="float: left">
-        <form class="form-inline">
+        <form class="form-inline" action="${pageContext.request.contextPath}/findUserByPageServlet" method="post">
             <div class="form-group">
                 <label for="exampleInputName2">姓名</label>
-                <input type="text" class="form-control" id="exampleInputName2">
+                <input type="text" name="name" value="${requestScope.condition.name[0]}" class="form-control"
+                       id="exampleInputName2">
             </div>
             <div class="form-group">
                 <label for="exampleInputName3">籍贯</label>
-                <input type="text" class="form-control" id="exampleInputName3">
+                <input type="text" name="address" value="${requestScope.condition.address[0]}" class="form-control"
+                       id="exampleInputName3">
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail2">Email</label>
-                <input type="email" class="form-control" id="exampleInputEmail2">
+                <input type="text" name="email" value="${requestScope.condition.email[0]}" class="form-control"
+                       id="exampleInputEmail2">
             </div>
             <button type="submit" class="btn btn-default">查询</button>
         </form>
@@ -164,7 +167,7 @@
 
             <c:if test="${requestScope.userByPage.currentPage != 1}">
                 <li>
-                    <a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${requestScope.userByPage.currentPage - 1}&&rows=${requestScope.userByPage.rows}"
+                    <a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${requestScope.userByPage.currentPage - 1}&rows=${requestScope.userByPage.rows}&name=${requestScope.condition.name[0]}&address=${requestScope.condition.address[0]}&email=${requestScope.condition.email[0]}"
                        aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
@@ -175,19 +178,19 @@
 
                 <c:if test="${requestScope.userByPage.currentPage == i}">
                     <li class="active"><a
-                            href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${i}&&rows=${requestScope.userByPage.rows}">${i}</a>
+                            href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${i}&rows=${requestScope.userByPage.rows}&name=${requestScope.condition.name[0]}&address=${requestScope.condition.address[0]}&email=${requestScope.condition.email[0]}">${i}</a>
                     </li>
                 </c:if>
                 <c:if test="${requestScope.userByPage.currentPage != i}">
                     <li>
-                        <a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${i}&&rows=${requestScope.userByPage.rows}">${i}</a>
+                        <a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${i}&rows=${requestScope.userByPage.rows}&name=${requestScope.condition.name[0]}&address=${requestScope.condition.address[0]}&email=${requestScope.condition.email[0]}">${i}</a>
                     </li>
                 </c:if>
             </c:forEach>
 
             <c:if test="${requestScope.userByPage.currentPage != requestScope.userByPage.totalPage}">
                 <li>
-                    <a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${requestScope.userByPage.currentPage + 1}&&rows=${requestScope.userByPage.rows}"
+                    <a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${requestScope.userByPage.currentPage + 1}&rows=${requestScope.userByPage.rows}&name=${requestScope.condition.name[0]}&address=${requestScope.condition.address[0]}&email=${requestScope.condition.email[0]}"
                        aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>

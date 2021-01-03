@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * @author JacksonTom
@@ -45,11 +46,16 @@ public class FindUserByPageServlet extends HttpServlet {
         if (rows <= 0 || rows > 100){
             rows = 10;
         }
+
+        //获取查询条件
+        Map<String, String[]> condition = request.getParameterMap();
+
         UserService userService = new UserServiceImpl();
-        PageBean<User> userByPage = userService.findUserByPage(currentPage, rows);
+        PageBean<User> userByPage = userService.findUserByPage(currentPage, rows,condition);
         System.out.println(userByPage);
         //存入request，转发
         request.setAttribute("userByPage",userByPage);
+        request.setAttribute("condition",condition);
         request.getRequestDispatcher("/list.jsp").forward(request,response);
     }
 

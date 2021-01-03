@@ -7,6 +7,7 @@ import cn.itcast.domain.User;
 import cn.itcast.service.UserService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author JacksonTom
@@ -53,16 +54,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public PageBean<User> findUserByPage(int currentPage, int rows) {
+    public PageBean<User> findUserByPage(int currentPage, int rows, Map<String, String[]> condition) {
         PageBean<User> userPageBean = new PageBean<User>();
         userPageBean.setCurrentPage(currentPage);
         userPageBean.setRows(rows);
         //总记录数
-        int totalCount = dao.findTotalCount();
+        int totalCount = dao.findTotalCount(condition);
         userPageBean.setTotalCount(totalCount);
         userPageBean.setTotalPage(totalCount % rows == 0 ? totalCount / rows : totalCount / rows + 1);
         int start = (currentPage - 1) * rows;
-        List<User> userByPage = dao.findUserByPage(start, rows);
+        List<User> userByPage = dao.findUserByPage(start, rows,condition);
         userPageBean.setList(userByPage);
         return userPageBean;
     }
