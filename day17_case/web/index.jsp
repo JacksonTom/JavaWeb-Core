@@ -19,7 +19,10 @@
 <body>
 
 <div>
-    ${sessionScope.user.username},欢迎您！
+    ${sessionScope.user.username},欢迎您！<br>
+    ${pageScope}<br>
+    ${pageContext.request}<br>
+    ${pageContext.request.contextPath}<br>
 </div>
 <div align="center">
     <a
